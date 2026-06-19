@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CourtBook — Hyper-Velocity Venue & Court Scheduling</title>
+  
+  <!-- Meta tags for SEO -->
+  <meta name="description" content="Secure real-time sports venue and court bookings. Experience lightning-fast checkout and seamless scheduling with our Antigravity portal.">
+  <meta name="keywords" content="sports booking, court rental, basketball court booking, tennis scheduling, soccer pitch reservation">
+  <meta name="author" content="CourtBook Team">
+  
+  <!-- Futuristic Typography: Orbitron & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Antigravity Core Design System -->
+  <link rel="stylesheet" href="css/antigravity.css">
+</head>
+<body>
+
+  <!-- ── 1. GLOBAL NAVIGATION BAR ── -->
+  <nav class="ag-nav">
+    <div class="ag-nav-brand" onclick="location.hash = '#/'">
+      COURT<span class="ag-glow-text">BOOK</span>
+    </div>
+    
+    <button class="ag-nav-toggle" id="nav-toggle" aria-label="Toggle Navigation menu">
+      ☰
+    </button>
+
+    <div class="ag-nav-links">
+      <button class="ag-nav-link active" onclick="location.hash = '#/'">Discover</button>
+      
+      <!-- Authenticated links (hidden by default) -->
+      <div id="nav-user-container" style="display: none; align-items: center; gap: 16px;">
+        <button class="ag-nav-link" onclick="location.hash = '#/bookings'">My Bookings</button>
+        <button class="ag-nav-link" onclick="location.hash = '#/profile'">Profile</button>
+        <div class="ag-nav-avatar" id="nav-user-avatar" onclick="location.hash = '#/profile'">U</div>
+      </div>
+
+      <!-- Guest action -->
+      <button class="ag-btn ag-btn-primary ag-btn-sm" id="nav-auth-btn" onclick="showAuthModal('signin')">
+        Sign In
+      </button>
+    </div>
+  </nav>
+
+  <!-- Space for fixed navbar -->
+  <div style="height: 70px;"></div>
+
+  <!-- ── 2. MAIN SPA PORT CONTAINER ── -->
+  <main id="app">
+    <!-- View content is injected here dynamically -->
+    <div class="ag-flex-center" style="min-height: calc(100vh - 70px);">
+      <div class="ag-spinner"></div>
+    </div>
+  </main>
+
+  <!-- ── 3. TOAST NOTIFICATION STACK ── -->
+  <div class="ag-toast-container" id="toast-container"></div>
+
+  <!-- ── 4. AUTHENTICATION MODAL OVERLAY ── -->
+  <div class="ag-modal-overlay" id="auth-modal" style="display: none;">
+    <div class="ag-modal">
+      <div class="ag-modal-header">
+        <h2 id="auth-modal-title" class="ag-glow-text">Access Portal</h2>
+        <button class="ag-modal-close" onclick="hideAuthModal()">&times;</button>
+      </div>
+      <div class="ag-modal-body">
+        
+        <!-- SIGN IN PANEL -->
+        <form id="auth-signin-form" class="ag-flex-col" style="gap: 16px;">
+          <div class="ag-input-group">
+            <label>Email ID</label>
+            <input type="email" id="signin-email" class="ag-input" placeholder="e.g. pilot@antigravity.io" required>
+          </div>
+          <div class="ag-input-group">
+            <label>Security Key</label>
+            <input type="password" id="signin-password" class="ag-input" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="ag-btn ag-btn-primary" style="width: 100%; margin-top: 8px;">
+            Authorize Connection
+          </button>
+          <p class="ag-text-center ag-text-sm ag-text-muted" style="margin-top: 10px;">
+            New to CourtBook? 
+            <a href="javascript:void(0)" onclick="showAuthModal('signup')">Initialize Profile</a>
+          </p>
+        </form>
+
+        <!-- SIGN UP PANEL -->
+        <form id="auth-signup-form" class="ag-flex-col" style="gap: 16px; display: none;">
+          <div class="ag-input-group">
+            <label>Full Name</label>
+            <input type="text" id="signup-name" class="ag-input" placeholder="e.g. Alex Starfield" required>
+          </div>
+          <div class="ag-input-group">
+            <label>Email ID</label>
+            <input type="email" id="signup-email" class="ag-input" placeholder="e.g. pilot@antigravity.io" required>
+          </div>
+          <div class="ag-input-group">
+            <label>Security Key</label>
+            <input type="password" id="signup-password" class="ag-input" placeholder="Choose a strong password" required>
+          </div>
+          <button type="submit" class="ag-btn ag-btn-primary" style="width: 100%; margin-top: 8px;">
+            Initialize Profile
+          </button>
+          <p class="ag-text-center ag-text-sm ag-text-muted" style="margin-top: 10px;">
+            Already have a profile? 
+            <a href="javascript:void(0)" onclick="showAuthModal('signin')">Authorize Connection</a>
+          </p>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. SCRIPTS LOAD SEQUENCE ── -->
+  <!-- Supabase JS Client CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- App Custom Logic Modules -->
+  <script src="js/config.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/venues.js"></script>
+  <script src="js/booking.js"></script>
+  <script src="js/payment.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
